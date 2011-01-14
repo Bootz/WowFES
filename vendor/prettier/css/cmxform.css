@@ -1,0 +1,88 @@
+/**
+ * Name: cmxform Styles
+ * Author: Nick Rigby
+ * Link: http://www.alistapart.com/articles/prettyaccessibleforms
+ */
+
+form.cmxform {
+    width: 370px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+form.cmxform legend {
+    padding: 0 2px;
+    font-weight: bold;
+    _margin: 0 -7px; /* IE Win */
+    padding-left: 0;
+}
+
+form.cmxform label {
+    display: inline-block;
+    line-height: 1.8;
+    vertical-align: top;
+    width: 120px;
+}
+
+form.cmxform legend,
+form.cmxform label {
+    color: #333;
+}
+
+form.cmxform fieldset {
+    margin-bottom: 10px;
+    border: none;
+    border-top: 1px solid #C9DCA6;
+    background: url(../images/cmxform-fieldset.gif) left bottom repeat-x;
+}
+
+form.cmxform fieldset fieldset {
+    background: none;
+    border: none;
+    margin: 3px 0 0;
+}
+
+form.cmxform fieldset fieldset legend {
+    padding: 0 0 5px;
+    font-weight: normal;
+}
+
+form.cmxform fieldset fieldset label {
+    margin-left: 123px;
+    display: block;
+    width: auto;
+}
+
+form.cmxform fieldset ol {
+    margin: 0;
+    padding: 0;
+}
+
+form.cmxform fieldset li {
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+    padding: 5px 10px 7px;
+    background: url(../images/cmxform-divider.gif) left bottom repeat-x;
+}
+
+form.cmxform em {
+    font-weight: bold;
+    font-style: normal;
+    color: #f00;
+}
+
+#table-p {
+    margin: 10px 0;
+}
+
+#sr {
+    position: absolute;
+    left: -9999em;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/*form.cmxform legend { display: inline-block; } [> IE Mac legend fix <]*/

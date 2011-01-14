@@ -1,0 +1,123 @@
+Q1: How to change default index webpage?
+
+Answer:
+    If your real URL is http://www.example.com.
+    When browser visit http://www.example.com, it will route to default index webpage.
+
+    The controller is define in app/controllers/index_controller.php, and
+    the view is define in app/views/index.php.
+
+
+
+Q2: How to change default error 4o4 webpage?
+
+Answer:
+    The controller is define in app/controllers/error404_controller.php, and
+    the view is define in app/views/error404.php.
+
+
+
+Q3: How do I add a URL, http://www.example.com/blog?
+
+Answer:
+    You need add new app/controllers/blog_controller.php, and
+    new app/views/blog_index.php.
+
+    The blog_controller.php can reference app/controllers/blog_controller.php, and
+    the blog_index.php can reference app/views/blog_index.php.
+
+
+Q4: How do I control http://www.example.com/blog in RESTFull?
+
+Answer:
+    You can reference app/controllers/blog_controller.php, and
+    app/views/blog_*.php.
+
+    Visit http://www.example.com/blog will list the default webpage.
+    This is define in index() function of blog_controller.php, and
+    the view is define in app/views/blog_index.php.
+
+    If visit http://www.example.com/blog/item/1 with HTTP_GET, will show the first post of blog.
+    You can reference item_get() function in app/controllers/blog_controller.php, and
+    app/views/blog_item_get.php.
+    
+    Notice1, 'blot_item_get.php' is define in blog_controller.php, this can be change.
+    Notice2, BlogModel() will autoload from app/models/BlogModel.class.php.
+    Notice3, the 1 from http://www.example.com/blog/item/1 is map to $param[0] in blog_controller.php, and if
+             it is http://www.example.com/blog/item/1/a, '1' will map to $param[0], 'a' will map to $param[1], and so on.
+
+    If visit http://www.example.com/blog/post with HTTP_GET, will prepare to add a new post of blog.
+    You can reference post_get() function in app/controllers/blog_controller.php, and
+    app/views/blog_post_get.php.
+
+    When users submit, it will redirect to http://www.example.com/blog/item with HTTP_POST for add a new blog.
+    You can reference item_post() function in app/controllers/blog_controller.php, and
+    app/views/blog_item_post.php.
+
+
+Q5: How do I handle database?
+
+Answer:
+    Ideally, all database operation should define in app/models.
+
+    You can reference app/models/BlogModel.class.php.
+
+
+Q6: How do I handle cookie?
+
+Answer:
+    Please reference blog_login_get() function in app/controllers/blog_controller.php.
+
+
+
+Q7: How do I change layout in some webpages?
+
+Answer:
+    If you want to use another layout in webpage, you can define '$this->registry->view->layout' in controller.
+    For example, please check out html5_get() function in app/controllers/blog_controller.php.
+
+
+
+Q8: How do I use the same result in different function?
+
+Answer:
+    If you want http://www.example.com/blog/index2 and http://www.example.com/blog/post is the same page.
+    You can reference index2_get() function in app/controllers/blog_controller.php.
+
+
+
+Q9: How do I add javascript and css?
+
+Answer:
+    First put all your javascript in 'js' directory, all your css in 'css' directory.
+
+    If you want to add javascript and css in every webpage (globally).
+    You need to find out which layouts do you use, and
+    add javascript in app/views/layouts/{your_layouts}/footer.php,
+    add css in app/views/layouts/{your_layouts}/header.php.
+
+    But if you want add javascript and css only in http://www.example.com/blog/js_css.
+    You can reference blog_js_css_get() function in app/controllers/blog_controller.php, and
+    app/views/blog_jss_css_get.php.
+
+
+
+Q10: How do I support i18n?
+
+Answer:
+    Please check out i18n_get() function in app/controllers/blog_controller.php.
+
+
+
+Q11: How do I support iPad/iPhone/Android?
+
+Answer:
+    Please check out index_ipad() and index_mobile() function in app/controllers/blog_controller.php.
+
+
+
+Q12: How do I detect XMLHttpRequest?
+
+Answer:
+    Please check out index_xhr() function in app/controllers/blog_controller.php.
+

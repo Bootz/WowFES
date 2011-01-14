@@ -1,0 +1,42 @@
+1. Apache Web Server with mod_rewrite enabled
+
+   Support other web server, but you need to rewrite dot.htaccess to another compatible format.
+
+
+2. PHP 5.3+
+
+
+3. Copy WowFES proejct to where you wanted
+
+   For example, copy to /var/www/html.
+
+
+4. Modify index.php
+
+   Change `__site` to your real URL.
+
+   For example:
+   - If your real URL is http://www.example.com, you can define `__site` to '/'.
+   - If your real URL is http://www.example.com/us, you can define `__site` to '/us'.
+   - If your real URL is http://www.example.com/~personal/web, you can define `__site` to '/~personal/web'.
+
+
+5. Modify config/boot.php
+
+   You can change default timezone, site mode, cache mode, default language, site key, database and cookie configurations here.
+
+   For example:
+   - If you want to change site mode from 'test' mode to 'production' mode, you can change $mode to 'production'.
+   - If you want default language is 'fr', you can change $default_lang to 'fr'.
+
+
+6. Modify default DOCTYPE
+
+   Default DOCTYPE is XHTML, you can change to other DOCTYPE in $default_layout of app/controllers/base_controller.class.php.
+   Now support 'xhtml', 'html4' and 'html5'.
+
+
+7. Modify metadata for your site
+
+   Edit app/views/layouts/meta.php.
+
