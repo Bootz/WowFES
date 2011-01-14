@@ -10,6 +10,11 @@ The features of `WowFES` are:
 - Mobile detection (iPad, iPhone, Android)
 
 
+## Performance
+
+[http://www.flickr.com/photos/ant1005/5335579402/](http://www.flickr.com/photos/ant1005/5335579402/)
+
+
 ## Install and Usage
 
 Please check out in `docs` directory.
