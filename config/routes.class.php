@@ -41,11 +41,6 @@ class routes {
     private $request_param;
 
     /**
-     * Accept array of request methods
-     */
-    private static $REQUEST_METHOD = array('GET', 'POST', 'PUT', 'DELETE');
-
-    /**
      * request method
      */
     private $request_method;
@@ -95,29 +90,24 @@ class routes {
     }
 
     /**
-     * Validate request_method
+     * Validate request_methods
      * @return bool
      */
-    private function request_method() {
+    private function request_methods() {
 
         WowSecFilter::cleanDefault();
 
         if (get_magic_quotes_gpc()) {
-            $_GET     = WowSecFilter::stripslashes_deep($_GET);
-            $_POST    = WowSecFilter::stripslashes_deep($_POST);
-            $_COOKIE  = WowSecFilter::stripslashes_deep($_COOKIE);
             $_REQUEST = WowSecFilter::stripslashes_deep($_REQUEST);
         }
+        $this->request_param = WowSecFilter::clean_deep($_REQUEST);
 
-        if (isset($_POST['_method']) && in_array($_POST['_method'], self::$REQUEST_METHOD)) {
-            $this->rquest_method = $_POST['_method'] . $this->get_client();
-            return TRUE;
+        if (isset($_POST['_method'])) {
+            $this->request_method = $_POST['_method'] . $this->get_client();
         }
-        else if (in_array($_SERVER['REQUEST_METHOD'], self::$REQUEST_METHOD)) {
+        else {
             $this->request_method = $_SERVER['REQUEST_METHOD'] . $this->get_client();
-            return TRUE;
         }
-        return FALSE;
     }
 
     /**
@@ -128,7 +118,7 @@ class routes {
     public function run() {
         $this->map();
 
-        if (is_readable($this->file) === FALSE) {
+        if (!file_exists($this->file)) {
             $this->file = $this->path.'/error404_controller.php';
             $this->controller = 'error404';
         }
@@ -162,10 +152,9 @@ class routes {
         else {
             $parts = explode('/', $route);
             $this->controller = $parts[0];
-            $method = $this->request_method();
-            if(isset($parts[1]) && $method) {
+            $this->request_methods();
+            if(isset($parts[1])) {
                 $this->action = $parts[1] . '_' . $this->request_method;
-                $this->request_param = WowSecFilter::clean_deep($_REQUEST);
                 if(isset($parts[2])) {
                     $this->param = array_slice($parts, 2);
                 }
