@@ -2,6 +2,12 @@
 /**********************************
  * Custome configurations
  **********************************/
+// This is for CSS bugs of IE 6/7/8/9,
+// http://robertnyman.com/2010/02/18/css-files-downloaded-twice-in-internet-explorer-with-protocol-relative-urls/
+define('__fqdn', 'antbsd.twbbs.org');
+
+// You can ignore http/https and domain
+define('__site', '/~ant');
 
 // Set default timezone
 date_default_timezone_set("Asia/Taipei");
@@ -47,6 +53,14 @@ $cookie_config = array(
 /**********************************
  * WowFES internal configurations
  **********************************/
+// WowFES javascripts path
+define('__js' , __web . '/js');
+
+// WowFES css styles path
+define('__css', __web . '/css');
+
+// WowFES images path
+define('__img', __web . '/img');
 
 // Initial environment mode
 require_once(__web . "/config/environments/$application_mode.php");
