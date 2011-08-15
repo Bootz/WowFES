@@ -46,7 +46,7 @@ class view {
         }
 
         if (array_key_exists('layout', $this->vars)) {
-            $header = $views_root . 'layouts/' . $this->vars['layout'] . '/header.php';
+            $header = $views_root . '_layouts/' . $this->vars['layout'] . '/header.php';
             if (file_exists($header)) {
                 include_once($header);
             }
@@ -55,7 +55,7 @@ class view {
         // Load variables
         foreach ($this->vars as $key => $value) {
             // multiple language (i18n)
-            $i18n_file = $views_root . 'i18n/' . $this->registry->lang . "/$name.php";
+            $i18n_file = $views_root . '_i18n/' . $this->registry->lang . "/$name.php";
             if (file_exists($i18n_file)) {
                 include_once($i18n_file);
                 if (array_key_exists($value, $i18n)) {
@@ -73,7 +73,7 @@ class view {
         include_once($request_file);
 
         if (array_key_exists('layout', $this->vars)) {
-            $footer = $views_root . 'layouts/' . $this->vars['layout'] . '/footer.php';
+            $footer = $views_root . '_layouts/' . $this->vars['layout'] . '/footer.php';
             if (file_exists($footer)) {
                 include_once($footer);
             }
