@@ -38,7 +38,10 @@ class view {
      */
     function show($name, $title = '') {
         $views_root = __web . '/app/views/';
+        $request_file_prefix = $views_root . $name;
+        $request_file_header = $views_root . '_header/' . $name . '.php';
         $request_file = $views_root . $name . '.php';
+        $request_file_footer = $views_root . '_footer/' . $name . '.php';
 
         if (file_exists($request_file) == FALSE) {
             throw new Exception('View not found in '. $request_file);
@@ -70,6 +73,9 @@ class view {
             }
         }
 
+        if (file_exists($request_file_header) === TRUE) {
+            include($request_file_header);
+        }
         include_once($request_file);
 
         if (array_key_exists('layout', $this->vars)) {
@@ -77,6 +83,9 @@ class view {
             if (file_exists($footer)) {
                 include_once($footer);
             }
+        }
+        if (file_exists($request_file_footer) === TRUE) {
+            include($request_file_footer);
         }
     }
 }
