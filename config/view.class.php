@@ -43,7 +43,7 @@ class view {
         $request_file = $views_root . $name . '.php';
         $request_file_footer = $views_root . '_footer/' . $name . '.php';
 
-        if (file_exists($request_file) == FALSE) {
+        if (file_exists($request_file) === FALSE) {
             throw new Exception('View not found in '. $request_file);
             return FALSE;
         }
