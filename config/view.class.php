@@ -74,7 +74,7 @@ class view {
         }
 
         if (file_exists($request_file_header) === TRUE) {
-            include($request_file_header);
+            include_once($request_file_header);
         }
         include_once($request_file);
 
@@ -85,7 +85,7 @@ class view {
             }
         }
         if (file_exists($request_file_footer) === TRUE) {
-            include($request_file_footer);
+            include_once($request_file_footer);
         }
     }
 }
