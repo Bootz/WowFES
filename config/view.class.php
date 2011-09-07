@@ -87,6 +87,8 @@ class view {
         if (file_exists($request_file_footer) === TRUE) {
             include_once($request_file_footer);
         }
+
+        echo "</body>\n</html>";
     }
 }
 ?>
