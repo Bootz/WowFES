@@ -9,7 +9,9 @@ class css_helpers extends base_helpers {
         }
 
         if (strpos($url, '/vendor/') === 0) {
-            $url = $site . __site . $url;
+            if (__site !== '') {
+                $url = $site . __site . $url;
+            }
         }
         else if (!strstr($url, '//')) {
             $url = $site . __site . '/css/' . $url;
