@@ -2,7 +2,9 @@
 class js_helpers extends base_helpers {
     public function javascript_tag($url, $config = array()) {
         if (strpos($url, '/vendor/') === 0) {
-            $url = __site . '/' . $url;
+            if (__site !== '') {
+                $url = __site . '/' . $url;
+            }
         }
         else if (!strstr($url, '//')) {
             $url = __site . '/js/' . $url;
