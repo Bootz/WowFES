@@ -7,7 +7,8 @@
 define('__fqdn', 'antbsd.twbbs.org');
 
 // You can ignore http/https and domain
-define('__site', '/~ant');
+#define('__site', '/~ant');
+define('__site', '');
 
 // Set default timezone
 date_default_timezone_set("Asia/Taipei");
