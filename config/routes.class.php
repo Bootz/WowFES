@@ -166,7 +166,7 @@ class routes {
         }
 
         if (empty($this->action)) {
-            $this->action = 'index' . $this->get_client();
+            $this->action = 'index' . '_' . $this->request_method;
         }
 
         $this->file = $this->path .'/'. $this->controller . '_controller.php';
