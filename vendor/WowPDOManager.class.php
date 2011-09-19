@@ -440,7 +440,7 @@ class WowPDOManager {
             return FALSE;
         }
         catch (PDOException $e) {
-            return self::errorInfo();
+            return $e->getMessage();
         }
     }
 
