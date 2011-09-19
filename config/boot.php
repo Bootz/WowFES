@@ -78,10 +78,11 @@ require_once(__web . '/config/' . 'view.class.php');
 // Initial base_controller class
 require_once(__web . '/app/controllers/' . 'base_controller.class.php');
 
-// Auto load models / helpers / vendor classes
+// Auto load models / helpers / vendor / orm classes
+// orm is for paris (https://github.com/j4mie/paris)
 function __autoload($class_name) {
     $filename = $class_name . '.class.php';
-    $walk_path = array('/app/models/', '/app/helpers/', '/vendor/');
+    $walk_path = array('/app/models/', '/app/helpers/', '/vendor/', '/orm/');
     foreach($walk_path as $path) {
         $file = __web . $path . $filename;
         if (file_exists($file)) {
@@ -99,7 +100,19 @@ $registry = new registry;
 $registry->lang = $default_lang;
 
 // Set database instance
-$registry->db = WowPDOManager::getInstance($db_config);
+// Method 1: WowPDOManager (reference: blog demo)
+//$registry->db = WowPDOManager::getInstance($db_config);
+// Method 2: idiorm.php (reference: cook demo)
+$pdo = new PDO($db_config['DB_DRIVER'] . ":host=" . $db_config['DB_HOST'] . ";port=" . $db_config['DB_PORT'] . ";dbname=" . $db_config['DB_DATABASE'], $db_config['DB_USER'], $db_config['DB_PASSWORD'],
+    array(PDO::ATTR_PERSISTENT => $db_config['DB_CONN_PERSISTENT'],
+          PDO::ATTR_TIMEOUT => $db_config['DB_TIMEOUT'],
+          PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+if ($db_config['DB_DRIVER'] === 'mysql') {
+    $pdo->setAttribute(1002, "SET NAMES '" . $db_config['DB_CHARSET'] . "'");
+}
+ORM::set_db($pdo);
+$registry->db = ORM::for_table(NULL);
+
 
 /**
  * Example: Query key from database
