@@ -90,24 +90,26 @@ class routes {
     }
 
     /**
-     * Validate request_methods
-     * @return bool
+     * Validate request
+     * @return array
      */
-    private function request_methods() {
+    private function safe_request() {
 
         WowSecFilter::cleanDefault();
 
         if (get_magic_quotes_gpc()) {
             $_REQUEST = WowSecFilter::stripslashes_deep($_REQUEST);
         }
-        $this->request_param = WowSecFilter::clean_deep($_REQUEST);
+        $_request_param = WowSecFilter::clean_deep($_REQUEST);
 
         if (isset($_POST['_method'])) {
-            $this->request_method = $_POST['_method'] . $this->get_client();
+            $_request_method = $_POST['_method'] . $this->get_client();
         }
         else {
-            $this->request_method = $_SERVER['REQUEST_METHOD'] . $this->get_client();
+            $_request_method = $_SERVER['REQUEST_METHOD'] . $this->get_client();
         }
+
+        return array($_request_param, $_request_method);
     }
 
     /**
@@ -152,7 +154,7 @@ class routes {
         else {
             $parts = explode('/', $route);
             $this->controller = $parts[0];
-            $this->request_methods();
+            list($this->request_param, $this->request_method) = $this->safe_request();
             if(isset($parts[1])) {
                 $this->action = $parts[1] . '_' . $this->request_method;
                 if(isset($parts[2])) {
