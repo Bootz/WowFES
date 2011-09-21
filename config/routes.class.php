@@ -100,6 +100,7 @@ class routes {
                     || strpos($_http_user_agent,'Opera Mini')
                     || strpos($_http_user_agent,'Windows Mobile')
                     || strpos($_http_user_agent,'Windows Phone')
+                    || strpos($_http_user_agent,'Symbian')
                     || strpos($_http_user_agent,'webOS')) {
                     return '_mobile';
                 }
