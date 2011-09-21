@@ -78,10 +78,29 @@ class routes {
         }
         else {
             if (isset($_SERVER['HTTP_USER_AGENT'])) {
-                if (strpos($_SERVER['HTTP_USER_AGENT'],'iPad')) {
+                // http://www.zytrax.com/tech/web/mobile_ids.html
+                // http://www.galaxytabs.com/tag/user-agent/
+                // http://detectmobilebrowsers.com/
+
+                $_http_user_agent = $_SERVER['HTTP_USER_AGENT'];
+                if (strpos($_http_user_agent,'iPad')) {
                     return '_ipad';
                 }
-                else if (strpos($_SERVER['HTTP_USER_AGENT'],'iPhone') || strpos($_SERVER['HTTP_USER_AGENT'],'iPod') || strpos($_SERVER['HTTP_USER_AGENT'],'Android') || strpos($_SERVER['HTTP_USER_AGENT'],'webOS')) {
+                else if (strpos($_http_user_agent,'GT-')) {
+                    return '_galaxytab';
+                }
+                else if (strpos($_http_user_agent,'iPhone')
+                    || strpos($_http_user_agent,'iPod')
+                    || strpos($_http_user_agent,'Android')
+                    || strpos($_http_user_agent,'Bada')
+                    || strpos($_http_user_agent,'BlackBerry')
+                    || strpos($_http_user_agent,'HTC') // Opera in HTC
+                    || strpos($_http_user_agent,'htc') // Opera in HTC
+                    || strpos($_http_user_agent,'Opera Mobi')
+                    || strpos($_http_user_agent,'Opera Mini')
+                    || strpos($_http_user_agent,'Windows Mobile')
+                    || strpos($_http_user_agent,'Windows Phone')
+                    || strpos($_http_user_agent,'webOS')) {
                     return '_mobile';
                 }
             }
@@ -132,6 +151,17 @@ class routes {
         $controller = new $class($this->registry);
 
         if (is_callable(array($controller, $this->action)) === FALSE) {
+            //list($_action, $_request_method) = explode('_', $this->action);
+            //if (is_callable(array($controller, $_action . '_' . $_request_method)) === FALSE) {
+            //    if (is_callable(array($controller, $_action)) === FALSE) {
+            //        $action = 'index';
+            //    }
+            //    else {
+            //        $action = $_action;
+            //    }
+            //else {
+            //    $action = $_action . '_' . $_request_method;
+            //}
             $action = 'index';
         }
         else {
@@ -147,6 +177,7 @@ class routes {
     private function map() {
         // Get route from URL
         $route = (empty($_GET['r'])) ? '' : $_GET['r'];
+        list($this->request_param, $this->request_method) = $this->safe_request();
 
         if (empty($route)) {
             $route = 'index';
@@ -154,7 +185,6 @@ class routes {
         else {
             $parts = explode('/', $route);
             $this->controller = $parts[0];
-            list($this->request_param, $this->request_method) = $this->safe_request();
             if(isset($parts[1])) {
                 $this->action = $parts[1] . '_' . $this->request_method;
                 if(isset($parts[2])) {
