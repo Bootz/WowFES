@@ -64,7 +64,7 @@ define('__css', __web . '/css');
 define('__img', __web . '/img');
 
 // Initial environment mode
-require_once(__web . "/config/environments/$application_mode.php");
+require_once(__web . "/config/environment/$application_mode.php");
 
 // Initial registry class
 require_once(__web . '/config/' . 'registry.class.php');
