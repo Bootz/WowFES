@@ -13,8 +13,8 @@ define('__site', '');
 // Set default timezone
 date_default_timezone_set("Asia/Taipei");
 
-// Set application mode, support 'test', 'development' and 'production'
-$application_mode = 'test';
+// Set application mode, support 'development' and 'production'
+$application_mode = 'development';
 
 // Set cache mode, support 'apc', 'wincache', 'memcache' and 'memcaced'
 $cache_mode = 'apc';
