@@ -82,7 +82,7 @@ require_once(__web . '/app/controllers/' . 'base_controller.class.php');
 // orm is for paris (https://github.com/j4mie/paris)
 function __autoload($class_name) {
     $filename = $class_name . '.class.php';
-    $walk_path = array('/app/models/', '/app/helpers/', '/vendor/', '/orm/');
+    $walk_path = array('/app/models/', '/app/helpers/', '/vendor/', '/config/database/orm/');
     foreach($walk_path as $path) {
         $file = __web . $path . $filename;
         if (file_exists($file)) {
