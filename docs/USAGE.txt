@@ -9,7 +9,7 @@ Answer:
 
 
 
-Q2: How to change default error 4o4 webpage?
+Q2: How to change default error 404 webpage?
 
 Answer:
     The controller is define in app/controllers/error404_controller.php, and
@@ -20,8 +20,7 @@ Answer:
 Q3: How do I add a URL, http://www.example.com/blog?
 
 Answer:
-    You need add new app/controllers/blog_controller.php, and
-    new app/views/blog_index.php.
+    You need add new app/controllers/blog_controller.php, and app/views/blog_index.php.
 
     The blog_controller.php can reference app/controllers/blog_controller.php, and
     the blog_index.php can reference app/views/blog_index.php.
@@ -40,7 +39,7 @@ Answer:
     If visit http://www.example.com/blog/item/1 with HTTP_GET, will show the first post of blog.
     You can reference item_get() function in app/controllers/blog_controller.php, and
     app/views/blog_item_get.php.
-    
+
     Notice1, 'blot_item_get.php' is define in blog_controller.php, this can be change.
     Notice2, BlogModel() will autoload from app/models/BlogModel.class.php.
     Notice3, the 1 from http://www.example.com/blog/item/1 is map to $param[0] in blog_controller.php, and if
@@ -60,13 +59,13 @@ Q5: How do I handle database?
 Answer:
     Ideally, all database operation should define in app/models.
 
-    You can reference app/models/BlogModel.class.php.
+    You can reference app/models/*.class.php.
 
 
 Q6: How do I handle cookie?
 
 Answer:
-    Please reference blog_login_get() function in app/controllers/blog_controller.php.
+    TDB
 
 
 
@@ -78,15 +77,7 @@ Answer:
 
 
 
-Q8: How do I use the same result in different function?
-
-Answer:
-    If you want http://www.example.com/blog/index2 and http://www.example.com/blog/post is the same page.
-    You can reference index2_get() function in app/controllers/blog_controller.php.
-
-
-
-Q9: How do I add javascript and css?
+Q8: How do I add javascript and css?
 
 Answer:
     First put all your javascript in 'js' directory, all your css in 'css' directory.
@@ -102,21 +93,8 @@ Answer:
 
 
 
-Q10: How do I support i18n?
 
-Answer:
-    Please check out i18n_get() function in app/controllers/blog_controller.php.
-
-
-
-Q11: How do I support iPad/iPhone/Android?
-
-Answer:
-    Please check out index_ipad() and index_mobile() function in app/controllers/blog_controller.php.
-
-
-
-Q12: How do I detect XMLHttpRequest?
+Q9: How do I detect XMLHttpRequest?
 
 Answer:
     Please check out index_xhr() function in app/controllers/blog_controller.php.

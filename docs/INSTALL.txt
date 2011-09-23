@@ -26,7 +26,7 @@
    You can change default timezone, site mode, cache mode, default language, site key, database and cookie configurations here.
 
    For example:
-   - If you want to change site mode from 'test' mode to 'production' mode, you can change $mode to 'production'.
+   - If you want to change site mode from 'development' mode to 'production' mode, you can change $mode to 'production'.
    - If you want default language is 'fr', you can change $default_lang to 'fr'.
 
 

@@ -160,6 +160,7 @@ class routes {
             //    else {
             //        $action = $_action;
             //    }
+            //}
             //else {
             //    $action = $_action . '_' . $_request_method;
             //}
@@ -190,6 +191,9 @@ class routes {
                 $this->action = $parts[1] . '_' . $this->request_method;
                 if(isset($parts[2])) {
                     $this->param = array_slice($parts, 2);
+                }
+                else {
+                    $this->param = array_slice($parts, 1);
                 }
             }
         }

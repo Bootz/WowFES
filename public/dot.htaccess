@@ -1,0 +1,8 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# depends on your __site in app/config/boot.php
+RewriteRule ^(.*)$ index.php?r=$1 [L,QSA]
+#RewriteRule ^(.*)$ /wowfes/index.php?r=$1 [L,QSA]

@@ -4,10 +4,10 @@
  **********************************/
 // This is for CSS bugs of IE 6/7/8/9,
 // http://robertnyman.com/2010/02/18/css-files-downloaded-twice-in-internet-explorer-with-protocol-relative-urls/
-define('__fqdn', 'antbsd.twbbs.org');
+define('__fqdn', 'www.yourdomain.com');
 
 // You can ignore http/https and domain
-#define('__site', '/~ant');
+//define('__site', '/wowfes');
 define('__site', '');
 
 // Set default timezone
@@ -29,9 +29,10 @@ $site_key = 'Cei4Wai4ohcoo3daeHooFiek5Nah3Eet';
 $db_config = array(
     'DB_DRIVER'          => 'mysql',
     'DB_HOST'            => 'localhost',
+    'DB_PORT'            => '3306',
     'DB_USER'            => 'root',
-    'DB_PASSWORD'        => '123456',
-    'DB_DATABASE'        => 'demo',
+    'DB_PASSWORD'        => 'password',
+    'DB_DATABASE'        => 'mysql',
     'DB_CHARSET'         => 'utf8',
     'DB_CONN_PERSISTENT' => FALSE,
     'DB_TIMEOUT'         => 15
@@ -64,27 +65,26 @@ define('__css', __web . '/css');
 define('__img', __web . '/img');
 
 // Initial environment mode
-require_once(__web . "/config/environment/$application_mode.php");
+require_once(__app . "/config/environment/$application_mode.php");
 
 // Initial registry class
-require_once(__web . '/config/' . 'registry.class.php');
+require_once(__app . '/config/registry.class.php');
 
 // Initial routes class
-require_once(__web . '/config/' . 'routes.class.php');
+require_once(__app . '/config/routes.class.php');
 
 // Initial view class
-require_once(__web . '/config/' . 'view.class.php');
+require_once(__app . '/config/view.class.php');
 
 // Initial base_controller class
-require_once(__web . '/app/controllers/' . 'base_controller.class.php');
+require_once(__app . '/app/controllers/base_controller.class.php');
 
-// Auto load models / helpers / vendor / orm classes
-// orm is for paris (https://github.com/j4mie/paris)
+// Auto load vendor classes
 function __autoload($class_name) {
     $filename = $class_name . '.class.php';
     $walk_path = array('/app/models/', '/app/helpers/', '/vendor/', '/config/database/orm/');
     foreach($walk_path as $path) {
-        $file = __web . $path . $filename;
+        $file = __app . $path . $filename;
         if (file_exists($file)) {
             include_once($file);
             return TRUE;
@@ -100,9 +100,9 @@ $registry = new registry;
 $registry->lang = $default_lang;
 
 // Set database instance
-// Method 1: WowPDOManager (reference: blog demo)
+// Method 1: WowPDOManager
 //$registry->db = WowPDOManager::getInstance($db_config);
-// Method 2: idiorm.php (reference: cook demo)
+// Method 2: idiorm.php
 $pdo = new PDO($db_config['DB_DRIVER'] . ":host=" . $db_config['DB_HOST'] . ";port=" . $db_config['DB_PORT'] . ";dbname=" . $db_config['DB_DATABASE'], $db_config['DB_USER'], $db_config['DB_PASSWORD'],
     array(PDO::ATTR_PERSISTENT => $db_config['DB_CONN_PERSISTENT'],
           PDO::ATTR_TIMEOUT => $db_config['DB_TIMEOUT'],
@@ -111,7 +111,7 @@ if ($db_config['DB_DRIVER'] === 'mysql') {
     $pdo->setAttribute(1002, "SET NAMES '" . $db_config['DB_CHARSET'] . "'");
 }
 ORM::set_db($pdo);
-$registry->db = ORM::for_table(NULL);
+//$registry->db = ORM::for_table(NULL);
 
 
 /**
